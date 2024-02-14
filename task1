@@ -1,0 +1,53 @@
+#include <iostream>
+using namespace std;
+const int width = 4;   //syun
+const int height = 5;  //tox
+
+struct  Color{
+	int Red=0;
+	int Green=0;
+	int Blue=0;
+};
+class Photo {
+private:
+	Color photo[height][width];
+public:
+	void setPixel(int x, int y, int r, int g, int b) {
+		if (x >= 0 && x < height && y >= 0 && y < width) {
+			photo[x][y].Red = r;
+			photo[x][y].Green = g;
+			photo[x][y].Blue= b;
+		}
+	}
+	Color getPixel(int x, int y) {
+		if (x >= 0 && x < height && y >= 0 && y < width) {
+			return photo[x][y];
+		}
+		else
+		{
+			return{ 0,0,0 };
+		}
+	}
+	void display() {
+		for (int x = 0; x < height; x++)
+		{
+			for (int y = 0; y < width; y++)
+			{
+				cout << "(" << photo[x][y].Red << "," << photo[x][y].Green << "," << photo[x][y].Blue << ") ";
+
+			}
+			cout << endl;
+		}
+	}
+};
+
+int main()
+{
+	
+	Photo photo;
+	photo.setPixel(2, 3, 34, 67, 34);
+	photo.getPixel(2, 3);
+
+	photo.display();
+	return 0;
+}
