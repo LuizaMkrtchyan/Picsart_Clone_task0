@@ -1,0 +1,49 @@
+#include <iostream>
+#include <windows.h> 
+using namespace std;
+#define N 6
+void obj(int arr[N][N],int x,int y) {
+	if (arr[x][y] == 1 && x>=0 && x<N && y>=0 && y<N) {
+		arr[x][y] = -1;
+		obj(arr, x - 1, y); //up
+		obj(arr, x, y + 1); //right
+		obj(arr, x + 1, y); //down
+		obj(arr, x, y - 1); //left
+	}
+}
+int main()
+{
+	HANDLE console_color = GetStdHandle(STD_OUTPUT_HANDLE);
+	int matrix[N][N];
+	cout << "-----INPUT-----\n";
+	for (int i = 0; i < N; i++)
+	{
+		for (int j = 0; j < N; j++)
+		{
+			matrix[i][j] = rand() % 2;
+			if (matrix[i][j] == 1) {
+				SetConsoleTextAttribute(
+					console_color, 4);
+			}
+			cout << matrix[i][j] << " ";
+			SetConsoleTextAttribute(
+				console_color, 7);
+		}
+		cout << endl;
+	}
+	cout << endl;
+
+	int qanak = 0;
+	for (int i = 0; i < N; i++)
+	{
+		for (int j = 0; j < N; j++)
+		{
+			if (matrix[i][j] == 1) {
+				qanak++;
+				obj(matrix, i, j);
+			}
+		}
+	}
+
+	cout << "Qanak:" << qanak;
+}
